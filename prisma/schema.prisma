@@ -12,3 +12,8 @@ model Test {
   id String @id @default(cuid())
   description String @unique 
 }
+
+model Test2 {
+  id String @id @default(cuid())
+  description String @unique 
+}
