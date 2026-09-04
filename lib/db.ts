@@ -1,1 +1,0 @@
-// Need to initialize the Prisma Client in a way that prevents multiple instances from being created during hot reloading in development.
