@@ -3,7 +3,7 @@ import React from 'react'
 import {requireUnAuth} from "@/lib/auth-guard"
 
 const  AuthLayout = async ({children} : {children: React.ReactNode}) => {
-  await requireUnAuth();
+  // await requireUnAuth();
   return (
     <div className= "flex flex-col justify-center items-center h-screen">
       {children}
