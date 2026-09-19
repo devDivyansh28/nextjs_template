@@ -1,10 +1,22 @@
 import Image from 'next/image'
 import { requireAuth } from '@/lib/auth-guard';
 import LogoutButton from "@/components/ui/Logout"
+import { prisma } from '@/lib/db';
 
 async function Home() {
   const session = await requireAuth();
   const {user} = session;
+
+
+  const dbUser = await prisma.user.findUnique({
+    where : {id : session?.user?.id},
+    select : {
+      plan : true,
+      stripeCustomerID: true,
+      stripeCurrentPeriodEnd: true,
+      stripePriceId: true
+    }
+  });
 
   return (
     <div className='flex justify-center items-center min-h-screen bg-zinc-900 text-white p-4'>
