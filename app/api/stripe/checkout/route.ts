@@ -66,7 +66,7 @@ export async function POST(request : NextRequest){
           success_url: `${process.env.NEXT_PUBLIC_APP_URL}`,
           cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/pricing`,
           metadata: {
-            userID: user.id,
+            userId: user.id,
             priceId
           }
         });

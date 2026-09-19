@@ -34,6 +34,10 @@ export async function POST(request : NextRequest){
             case "checkout.session.completed":{
                 const session = event.data.object as Stripe.Checkout.Session;
 
+                 console.log("CHECKOUT SESSION:", session.id);
+                 console.log("METADATA:", session.metadata);
+                 console.log("SUBSCRIPTION:", session.subscription);
+
                 const userId = session.metadata?.userId;
                 const priceId = session.metadata?.priceId;
 
@@ -54,6 +58,8 @@ export async function POST(request : NextRequest){
                         plan: priceId === "premium" ? "PREMIUM" : "FREE",
                     }
                 })
+
+                break;
 
             }
             case "customer.subscription.updated":{
