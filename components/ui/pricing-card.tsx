@@ -22,8 +22,37 @@ interface PricingCardProps {
 
 export function PricingCard({ tier }: PricingCardProps) {
   
+  const handleSubscribe = async (priceId: string | null) => {
+    if(!priceId){
+      alert("This plan is Free no Subscription Needed")
+      return;
+    }
 
+   try {
+    const response = await fetch("/api/stripe/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ priceId }),
+    });
+
+    const { url } = await response.json();
+    if (url) {
+      window.location.href = url;
+    }else{
+      throw new Error("Failed To create checkout Session")
+    }
+   } catch (error) {
+     console.error("Subscription Error" , error);
+     alert("An Error Occured while processing your subscription. Please try again")
+   }
+    
+    
+  }
+   
   const isPopular = tier.isPopular;
+
 
   return (
     <article
@@ -87,9 +116,9 @@ export function PricingCard({ tier }: PricingCardProps) {
         <Button
           className={cn("w-full", isPopular ? "bg-primary hover:bg-primary/90" : "variant-outline")}
           size="lg"
-          disabled={tier.priceId === null}
+          // disabled={tier.priceId === null}
           aria-disabled={tier.priceId === null}
-          
+          onClick = {()=>handleSubscribe(tier.priceId)}
         >
           {tier.price === 0 ? "Get Started Free" : "Subscribe Now"}
         </Button>
