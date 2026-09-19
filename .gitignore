@@ -39,7 +39,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< HEAD
 .agents
 .claude
 .next
 .windsurf
+=======
+node_modules/
+dist/
+.env
+
+/lib/generated/prisma
+
+.agents
+
+.claude
+
+.windsurf
+>>>>>>> feature/authentication_and_authorization_using_better_auth
